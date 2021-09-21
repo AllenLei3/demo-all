@@ -1,4 +1,4 @@
-package org.xl.netty.http;
+package org.xl.netty.http.file;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

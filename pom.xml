@@ -16,10 +16,11 @@
     </properties>
 
     <modules>
-        <module>netty</module>
-        <module>java</module>
         <module>dubbo</module>
+        <module>java</module>
         <module>kafka</module>
+        <module>netty</module>
+        <module>spring</module>
         <module>utils</module>
     </modules>
 

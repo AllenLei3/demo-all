@@ -3,4 +3,4 @@
  *
  * @author xulei
  */
-package org.xl.netty.http;
+package org.xl.netty.http.file;

@@ -1,4 +1,4 @@
-package org.xl.java.nio;
+package org.xl.java.net.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

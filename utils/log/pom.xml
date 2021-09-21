@@ -5,17 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>demo-all</artifactId>
+        <artifactId>utils</artifactId>
         <groupId>org.xl</groupId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>utils</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>log</artifactId>
 
-    <modules>
-        <module>jackson</module>
-        <module>log</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+    </dependencies>
 
 </project>
