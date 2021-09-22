@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Properties>
+        <Property name="LOGS.DIR">utils/logs/log4j2</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger: %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="RollingFileError" fileName="${LOGS.DIR}/error.log"
+                     filePattern="${LOGS.DIR}/%d{yyyy-MM-dd}/error.log.%d{yyyy-MM-dd}.%i.log">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <AsyncLogger name="ErrorAsyncLog" level="ERROR" includeLocation="true">
+            <AppenderRef ref="RollingFileError"/>
+        </AsyncLogger>
+        <Root level="DEBUG" includeLocation="true">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFileError"/>
+        </Root>
+    </Loggers>
+</Configuration>
