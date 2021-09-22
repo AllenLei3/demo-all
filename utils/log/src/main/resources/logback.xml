@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--    scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+        scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+        debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration scan="false" scanPeriod="10 seconds" debug="false">
+
+    <!-- 定义变量-->
+    <!--也可以用define标签自己在代码中动态指定根目录 -->
+    <define name="LOCAL_IP" class="org.xl.utils.log.config.IpLogDefiner"/>
+    <property name="LOGS.DIR" value="utils/logs" />
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss} [${LOCAL_IP}] [%thread] %-5level %logger{90} - %msg%n" />
+
+    <!-- 控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 文件 -->
+    <appender name="ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS.DIR}/error.log</file>
+        <!-- 基于时间和文件大小做滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 日志文件格式 -->
+            <fileNamePattern>${LOGS.DIR}/%d{yyyy-MM-dd}/error.log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 保存的最长天数 -->
+            <maxHistory>10</maxHistory>
+            <!-- 单个文件最大大小 -->
+            <MaxFileSize>200MB</MaxFileSize>
+            <!-- 整体文件最大大小 -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 设置过滤级别 -->
+            <level>ERROR</level>
+            <!-- 用于配置符合过滤条件的操作 -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 用于配置不符合过滤条件的操作 -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR_LOG_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 控制丢弃日志的阈值，主要是防止队列满后阻塞。默认如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+         <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的阻塞队列的深度,该值会影响性能。默认值为256，即内存中最多保存256条日志 -->
+         <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="ERROR_LOG" />
+    </appender>
+
+    <root>
+        <level value = "DEBUG,INFO,ERROR,WARN" />
+        <appender-ref ref = "CONSOLE" />
+        <appender-ref ref = "ERROR_LOG_ASYNC" />
+    </root>
+</configuration>
