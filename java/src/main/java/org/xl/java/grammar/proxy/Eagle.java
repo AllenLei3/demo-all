@@ -1,4 +1,4 @@
-package org.xl.java.proxy;
+package org.xl.java.grammar.proxy;
 
 /**
  * @author xulei

@@ -1,4 +1,4 @@
-package org.xl.java.stream;
+package org.xl.java.grammar.stream;
 
 import java.util.function.Function;
 
