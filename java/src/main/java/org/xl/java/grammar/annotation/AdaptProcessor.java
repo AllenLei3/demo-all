@@ -1,4 +1,4 @@
-package org.xl.java.utils.annotation;
+package org.xl.java.grammar.annotation;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
@@ -27,14 +27,14 @@ import java.util.Set;
 /**
  * @author xulei
  */
-@SupportedAnnotationTypes("org.xl.java.utils.annotation.Adapt")
+@SupportedAnnotationTypes("org.xl.java.grammar.annotation.Adapt")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class AdaptProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (TypeElement annotation : annotations) {
-            if (!"foo.Adapt".equals(annotation.getQualifiedName().toString())) {
+            if (!"org.xl.java.grammar.annotation.Adapt".equals(annotation.getQualifiedName().toString())) {
                 continue;
             }
 

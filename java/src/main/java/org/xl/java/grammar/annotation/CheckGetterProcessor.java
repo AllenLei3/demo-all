@@ -1,4 +1,4 @@
-package org.xl.java.utils.annotation;
+package org.xl.java.grammar.annotation;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
