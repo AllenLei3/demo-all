@@ -16,6 +16,7 @@
     <modules>
         <module>jackson</module>
         <module>log</module>
+        <module>disruptor</module>
     </modules>
 
 </project>
