@@ -3,6 +3,7 @@ package org.xl.java.concurrence;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Random;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
@@ -12,43 +13,59 @@ import java.util.concurrent.TimeUnit;
  */
 public class DelayQueueDemo {
 
-    private static final DelayQueue<User> queue = new DelayQueue<>();
-
-    public static void main(String[] args) throws InterruptedException {
-        User user1 = new User("A", System.currentTimeMillis() + 10);
-        User user2 = new User("B", System.currentTimeMillis() + 20);
-        queue.put(user1);
-        queue.put(user2);
-
-        User user = queue.take();
-        System.out.println(user.name);
+    public static void main(String[] args) {
+        DelayQueue<User> queue = new DelayQueue<>();
+        // 创建延迟任务
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            User user = new User("task:" + i, random.nextInt(500));
+            queue.offer(user);
+        }
+        // 获取任务
+        User user;
+        try {
+            for (int i = 0; i < 10; i++) {
+                user = queue.take();
+                System.out.println(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Getter
     @Setter
     private static class User implements Delayed {
 
-        private String name;
+        private final String name;
 
         // timestamp
-        private long birthday;
+        private final long delayTime;
 
-        private long init;
+        private final long expire;
 
-        public User(String name, long birthday) {
+        public User(String name, long delay) {
             this.name = name;
-            this.birthday = birthday;
-            this.init = System.currentTimeMillis();
+            this.delayTime = delay;
+            this.expire = System.currentTimeMillis() + delay;
         }
 
+        /**
+         * 剩余时间=到期时间-当前时间
+         */
         @Override
         public long getDelay(TimeUnit unit) {
-            return unit.convert(init - birthday, TimeUnit.MILLISECONDS);
+            return unit.convert(expire - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
 
         @Override
         public int compareTo(Delayed o) {
-            return (int) (birthday - o.getDelay(TimeUnit.MILLISECONDS));
+            return (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
+        }
+
+        @Override
+        public String toString() {
+            return "User{name=" + name + ", delayTime=" + delayTime + ", expire=" + expire + "}";
         }
     }
 }
