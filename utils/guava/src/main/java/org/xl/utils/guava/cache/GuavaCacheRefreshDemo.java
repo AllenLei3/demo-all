@@ -24,18 +24,11 @@ public class GuavaCacheRefreshDemo {
                     System.out.println("key is:" + notification.getKey() + ", value is:" + notification.getValue()
                             + " 被移除! 原因:" + notification.getCause());
                 })
-                .build(new CacheLoader<String, String>() {
-                    @Override
-                    public String load(String key) throws Exception {
-                        System.out.println(Thread.currentThread().getName() + " 加载" + key + "开始");
-                        String value = String.valueOf(new Random().nextInt(100));
-                        System.out.println(Thread.currentThread().getName() + " 加载" + key + "结束");
-                        return value;
-                    }
-                });
+                .build(new DemoCacheLoader());
 
         // 添加元素
         cache.put("a", "1");
+        cache.refresh("a");
 
         // 等待5s后获取元素
         new Thread(() -> {
@@ -51,10 +44,10 @@ public class GuavaCacheRefreshDemo {
     /**
      * 随机缓存加载
      */
-    public static class DemoCacheLoader extends CacheLoader<String, Object> {
+    public static class DemoCacheLoader extends CacheLoader<String, String> {
 
         @Override
-        public Object load(String key) throws Exception {
+        public String load(String key) throws Exception {
             System.out.println(Thread.currentThread().getName() + " 加载" + key + "开始");
             TimeUnit.SECONDS.sleep(10);
             String value = String.valueOf(new Random().nextInt(100));
@@ -63,8 +56,8 @@ public class GuavaCacheRefreshDemo {
         }
 
         @Override
-        public ListenableFuture<Object> reload(String key, Object oldValue) throws Exception {
-            ListenableFutureTask<Object> task = ListenableFutureTask.create(() -> load(key));
+        public ListenableFuture<String> reload(String key, String oldValue) throws Exception {
+            ListenableFutureTask<String> task = ListenableFutureTask.create(() -> load(key));
             Executors.newCachedThreadPool().execute(task);
             return task;
         }
