@@ -16,11 +16,9 @@
     </properties>
 
     <modules>
-        <module>dubbo</module>
         <module>java</module>
         <module>kafka</module>
         <module>netty</module>
-        <module>spring</module>
         <module>utils</module>
         <module>redis</module>
     </modules>
