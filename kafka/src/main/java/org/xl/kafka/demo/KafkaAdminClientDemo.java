@@ -1,4 +1,4 @@
-package org.xl.kafka;
+package org.xl.kafka.demo;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
