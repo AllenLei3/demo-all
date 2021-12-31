@@ -18,7 +18,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class ConsumerDemo {
 
-    private static final String GROUP_NAME = "TestGroup";
     private static final AtomicBoolean RUNNING = new AtomicBoolean(true);
 
     public static void main(String[] args) {
@@ -44,7 +43,7 @@ public class ConsumerDemo {
         properties.setProperty("bootstrap.servers", KafkaConfig.BROKER_LIST);
         properties.setProperty("key.deserializer", StringDeserializer.class.getName());
         properties.setProperty("value.deserializer", StringDeserializer.class.getName());
-        properties.setProperty("group.id", GROUP_NAME);
+        properties.setProperty("group.id", KafkaConfig.GROUP_NAME);
         return properties;
     }
 }
