@@ -27,6 +27,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
+ * 一个{@link KafkaConsumer}的包装器, 封装了安全的位移提交的机制。客户端既不手动提交偏移量, 也不使用默认的自动提交功能。
+ * 正确处理完成的消息位移会被保存, 如果消息处理完成后没有显示执行{@link #ack(PartitionOffset)}, 则表示没有正确处理,
+ * 那么该消息之后的位移都不会被提交。这种处理机制保证了<i>至少一次</i>的消费语义, 避免因为消息未成功处理而位移已提交导致的消息丢失。
+ *
  * @author xulei
  */
 public abstract class BaseSafeConsumer<K, V> {
