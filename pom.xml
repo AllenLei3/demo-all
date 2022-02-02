@@ -22,6 +22,7 @@
         <module>utils</module>
         <module>redis</module>
         <module>zookeeper</module>
+        <module>mybatis</module>
     </modules>
 
 </project>
