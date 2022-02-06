@@ -10,7 +10,6 @@
         <property name="username" value="root"/>
         <property name="password" value="12345ssdlh"/>
     </properties>
-    <!-- 全局配置信息 -->
     <settings>
         <setting name="cacheEnabled" value="true"/>
     </settings>
@@ -18,6 +17,14 @@
     <typeAliases>
         <typeAlias type="org.xl.mybatis.UserInfo" alias="UserInfo"/>
     </typeAliases>
+    <!-- 自定义TypeHandler -->
+<!--    <typeHandlers>-->
+<!--        <typeHandler handler="org.xl.mybatis.type.IntEnumTypeHandler" javaType="org.xl.mybatis.type.IntEnum" jdbcType="INTEGER" />-->
+<!--    </typeHandlers>-->
+    <typeHandlers>
+        <package name="org.xl.mybatis.type"/>
+    </typeHandlers>
+    <!-- 全局配置信息 -->
     <environments default="development">
         <environment id="development">
             <!-- 配置事务管理器的类型 -->

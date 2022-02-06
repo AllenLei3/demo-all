@@ -1,5 +1,7 @@
 package org.xl.mybatis;
 
+import org.xl.mybatis.type.IntEnum;
+
 import java.util.Date;
 
 /**
@@ -11,7 +13,7 @@ public class UserInfo {
 
     private String name;
 
-    private int age;
+    private IntEnum age;
 
     private String address;
 
@@ -35,11 +37,11 @@ public class UserInfo {
         return this;
     }
 
-    public int getAge() {
+    public IntEnum getAge() {
         return age;
     }
 
-    public UserInfo setAge(int age) {
+    public UserInfo setAge(IntEnum age) {
         this.age = age;
         return this;
     }

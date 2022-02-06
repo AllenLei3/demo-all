@@ -6,7 +6,8 @@
     <resultMap id="UserInfoResultMap" type="UserInfo">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <result column="age" property="age"/>
+        <result column="age" property="age" />
+<!--        <result column="age" property="age" javaType="org.xl.mybatis.type.IntEnum" jdbcType="INTEGER" typeHandler="org.xl.mybatis.type.IntEnumTypeHandler"/>-->
         <result column="address" property="address"/>
         <result column="creat_time" property="creatTime"/>
     </resultMap>
