@@ -13,6 +13,6 @@
     </resultMap>
     <!-- 定义SQL语句 -->
     <select id="getAll" resultMap="UserInfoResultMap">
-        SELECT * FROM user_info;
+        SELECT * FROM user_info
     </select>
 </mapper>

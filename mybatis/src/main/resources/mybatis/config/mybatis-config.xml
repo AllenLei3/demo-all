@@ -27,6 +27,7 @@
     <!-- 自定义拦截器 -->
     <plugins>
         <plugin interceptor="org.xl.mybatis.interceptor.SimpleInterceptor"/>
+        <plugin interceptor="com.github.pagehelper.PageHelper"/>
     </plugins>
     <!-- 全局配置信息 -->
     <environments default="development">

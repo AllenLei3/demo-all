@@ -1,5 +1,7 @@
 package org.xl.mybatis;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,8 +23,10 @@ public class MyBatisMain {
                 new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
+            PageHelper.startPage(1, 1);
             List<UserInfo> list = sqlSession.selectList("org.xl.mybatis.UserInfoMapper.getAll");
-            System.out.println(list);
+            PageInfo<UserInfo> pageInfo = new PageInfo<>(list);
+            System.out.println(pageInfo);
         } finally {
             sqlSession.close();
         }
