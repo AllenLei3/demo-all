@@ -24,6 +24,7 @@
         <module>zookeeper</module>
         <module>mybatis</module>
         <module>springboot</module>
+        <module>dubbo</module>
     </modules>
 
 </project>
