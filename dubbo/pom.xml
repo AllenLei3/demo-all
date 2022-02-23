@@ -19,6 +19,7 @@
         <module>dubbo-sample-local</module>
         <module>dubbo-sample-xml</module>
         <module>dubbo-sample-api</module>
+        <module>dubbo-spi</module>
     </modules>
 
     <properties>

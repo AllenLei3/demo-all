@@ -1,0 +1,2 @@
+custom=org.xl.dubbo.spi.impl.CustomProtocol
+customwrapper=org.xl.dubbo.spi.impl.CustomProtocolWrapper
