@@ -25,6 +25,7 @@
         <module>mybatis</module>
         <module>springboot</module>
         <module>dubbo</module>
+        <module>algorithm</module>
     </modules>
 
 </project>
