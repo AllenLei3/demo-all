@@ -1,4 +1,4 @@
-package org.xl.algorithm.lru;
+package org.xl.algorithm.list;
 
 /**
  * 基于单链表实现的LRU缓存淘汰算法

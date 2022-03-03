@@ -1,4 +1,4 @@
-package org.xl.algorithm.linkedlist;
+package org.xl.algorithm.list;
 
 /**
  * 单链表简易实现
