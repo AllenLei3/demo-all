@@ -219,6 +219,103 @@ public class 链表 {
         return a;
     }
 
+    /**
+     * 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+     * 请你将两个数相加，并以相同形式返回一个表示和的链表。你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+     *
+     * 示例 1：
+     *
+     * 输入：l1 = [2,4,3], l2 = [5,6,4]
+     * 输出：[7,0,8]
+     * 解释：342 + 465 = 807.
+     *
+     * 示例 2：
+     *
+     * 输入：l1 = [0], l2 = [0]
+     * 输出：[0]
+     *
+     * 示例 3：
+     *
+     * 输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+     * 输出：[8,9,9,9,0,0,0,1]
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int carry = 0;// 表示当前是否需要进位
+        ListNode node1 = l1;// 当前l1节点
+        ListNode node2 = l2;// 当前l2节点
+        ListNode head = new ListNode(0);
+        ListNode current = head;
+
+        while (node1 != null || node2 != null) {
+            int x = node1 != null ? node1.val : 0;
+            int y = node2 != null ? node2.val : 0;
+            int sum = x + y + carry;// 计算总和
+            carry = sum / 10;// 判断是否进位
+            current.next = new ListNode(sum % 10);// 添加当前元素
+            current = current.next;
+            if (node1 != null) {
+                node1 = node1.next;
+            }
+            if (node2 != null) {
+                node2 = node2.next;
+            }
+        }
+        // 最后看是否需要向前补一位
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        }
+        return head.next;
+    }
+
+    /**
+     * 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+     *
+     * 示例 1：
+     *
+     * 输入：head = [1,2,3,4,5], n = 2
+     * 输出：[1,2,3,5]
+     *
+     * 示例 2：
+     *
+     * 输入：head = [1], n = 1
+     * 输出：[]
+     *
+     * 示例 3：
+     *
+     * 输入：head = [1,2], n = 1
+     * 输出：[1]
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // 先遍历链表获取总长度
+        int length = 0;
+        ListNode node = head;
+        while (node != null) {
+            length++;
+            node = node.next;
+        }
+        if (length == 0) {
+            return head;
+        }
+        // 相当于删除整个链表
+        if (length < n) {
+            return null;
+        }
+        if (length == n) {
+            return head.next;
+        }
+        int index = length - n;
+        node = head;
+        while (node.next != null) {
+            if (index == 1) {
+                node.next = node.next.next;
+                break;
+            }
+            index--;
+            node = node.next;
+        }
+        return head;
+    }
+
     public static class ListNode {
 
         public int val;
