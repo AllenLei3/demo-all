@@ -1,4 +1,4 @@
-package org.xl.algorithm.leetcode;
+package org.xl.algorithm.leetcode.jianzhioffer;
 
 import java.util.Arrays;
 

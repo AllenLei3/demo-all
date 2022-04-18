@@ -1,4 +1,4 @@
-package org.xl.algorithm.leetcode;
+package org.xl.algorithm.leetcode.jianzhioffer;
 
 import org.xl.algorithm.sort.QuickSort;
 
@@ -750,72 +750,4 @@ public class 数组 {
         // 转换成非进位和 + 进位
         return add(a ^ b, (a & b) << 1);
     }
-
-    /**
-     * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target  的那两个整数，并返回它们的数组下标。
-     *
-     * 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。你可以按任意顺序返回答案。
-     *
-     * 示例 1：
-     *
-     * 输入：nums = [2,7,11,15], target = 9
-     * 输出：[0,1]
-     * 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
-     *
-     * 示例 2：
-     *
-     * 输入：nums = [3,2,4], target = 6
-     * 输出：[1,2]
-     *
-     * 示例 3：
-     *
-     * 输入：nums = [3,3], target = 6
-     * 输出：[0,1]
-     */
-    public int[] twoSum2(int[] nums, int target) {
-        Map<Integer /* 值 */, Integer /* 索引下标 */> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int v = target - nums[i];
-            if (map.containsKey(v)) {
-                return new int[]{map.get(v), i};
-            }
-            map.put(nums[i], i);
-        }
-        return new int[0];
-    }
-
-    /**
-     * 给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。
-     * 找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。返回容器可以储存的最大水量。
-     *
-     * 示例 1：
-     *
-     * 输入：[1,8,6,2,5,4,8,3,7]
-     * 输出：49
-     *
-     * 示例 2：
-     *
-     * 输入：height = [1,1]
-     * 输出：1
-     */
-    public int maxArea(int[] height) {
-        int i = 0, j = height.length - 1;
-        int max = 0;
-        while (i <j) {
-            int left = height[i];
-            int right = height[j];
-            // 容器最大容量取决于最短的一方
-            if (left >= right) {
-                int area = right * (j - i);
-                max = Math.max(max, area);
-                j--;
-            } else {
-                int area = left * (j - i);
-                max = Math.max(max, area);
-                i++;
-            }
-        }
-        return max;
-    }
-
 }

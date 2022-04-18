@@ -1,4 +1,6 @@
-package org.xl.algorithm.leetcode;
+package org.xl.algorithm.leetcode.jianzhioffer;
+
+import org.xl.algorithm.leetcode.TreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -514,22 +516,23 @@ public class 二叉树 {
      */
     public int maxDepth(TreeNode root) {
         // 通过dfs进行深度遍历
-        dfs(root, new LinkedList<>());
+        dfs(root, 0);
         return maxCount;
     }
 
-    private int maxCount;
+    private int maxCount = 0;
 
-    private void dfs(TreeNode root, LinkedList<Integer> path) {
+    private void dfs(TreeNode root, int deep) {
         if (root == null) {
-            maxCount = Math.max(maxCount, path.size());
             return;
         }
-        path.add(root.val);
-        dfs(root.left, path);
-        dfs(root.right, path);
-        // 回溯
-        path.removeLast();
+        deep++;
+        // 如果递归到子节点，记录最大深度
+        if (root.left == null && root.right == null) {
+            maxCount = Math.max(maxCount, deep);
+        }
+        dfs(root.left, deep);
+        dfs(root.right, deep);
     }
 
     /**
@@ -648,16 +651,5 @@ public class 二叉树 {
             return left;
         }
         return root;
-    }
-
-    private static class TreeNode {
-
-        public int val;
-        public TreeNode left;
-        public TreeNode right;
-
-        public TreeNode(int val) {
-            this.val = val;
-        }
     }
 }
