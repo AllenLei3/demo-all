@@ -196,20 +196,19 @@ public class 链表 {
      * 解释：链表中没有环。
      */
     public boolean hasCycle(ListNode head) {
-        if (head == null || head.next == null) {
-            return false;
-        }
+        ListNode l1 = head;
+        ListNode l2 = head;
         // 快慢指针，如果是环一定会重合
-        ListNode slow = head;
-        ListNode fast = head.next;
-        while (slow != fast) {
-            if (fast == null || fast.next == null) {
+        while (true) {
+            if (l1 == null || l1.next == null) {
                 return false;
             }
-            slow = slow.next;
-            fast = fast.next.next;
+            l1 = l1.next;
+            l2 = l2.next.next;
+            if (l1 == l2) {
+                return true;
+            }
         }
-        return true;
     }
 
     /**
